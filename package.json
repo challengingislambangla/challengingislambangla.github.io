@@ -5,7 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --configuration production",
-    "postbuild": "./move-base-files.sh",
+    "postbuild": "npm run post-bash-script && npm run post-node-script",
+    "post-bash-script": "sh ./move-base-files.sh",
+    "post-node-script": "node ./generate-static-pages.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

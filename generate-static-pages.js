@@ -4,6 +4,7 @@ const path = require('path');
 
 const baseUrl = 'http://localhost:4200/challengingislambangla.github.io';  // Change to the live URL if deployed
 const routes = [
+    '/',
   '/data/data1',  // Add your dynamic routes here
   '/data/data2'   // You can add as many dynamic routes as needed
 ];
@@ -29,8 +30,11 @@ const routes = [
     const content = await page.content();
 
     // Define where the static HTML files should be saved
-    const filePath = path.join(__dirname, 'docs', `${route.replace(/\//g, '')}.html`);
+    let filePath = path.join(__dirname, 'docs', `${route.replace(/\//g, '')}.html`);
     
+    if (filePath.endsWith("/.html")) { // root file index.html replace
+        filePath = filePath.replace("/.html", "/index.html")
+    }
     // Save the HTML content to a file
     fs.writeFileSync(filePath, content);
     console.log(`Saved static page: ${filePath}`);
